@@ -1,11 +1,3 @@
-const Pokemon = require('../models/pokemon')
-
-
-module.exports = {
-    fetchPokemon,
-
-}
-
 async function fetchPokemon(pokemon) {
     try {
       const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
@@ -17,3 +9,4 @@ async function fetchPokemon(pokemon) {
     }
   }
 
+const pokemon =  fetchPokemon("charizard")
