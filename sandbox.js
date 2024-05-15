@@ -9,4 +9,4 @@ async function fetchPokemon(pokemon) {
     }
   }
 
-const pokemon =  fetchPokemon("charizard")
+const pokemon =  fetchPokemon('mewtwo')

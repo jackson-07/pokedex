@@ -34,7 +34,7 @@ As a user, I want to name my lineup.
 
 Currently the inspiration, wireframes are in progress..
 
-![pokedex](/public/images/pokedex.png)
+![Wireframe](/public/images/Wireframe.png)
 
 [Trello Board](https://trello.com/b/zNjuWdtp/pok%C3%A9dex) 
 

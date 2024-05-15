@@ -12,6 +12,12 @@ body {
   padding: 15px;
 }
 
+nav {
+  display: flex;
+  justify-content: flex-end;
+  max-height: 20px;
+}
+
 main {
   display: inline-block;
   margin-top: 2%;
