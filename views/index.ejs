@@ -2,13 +2,13 @@
     
 <main>
         
-  <img src="../images/pokeball.png" 
+    <img src="<%= pokemon.sprites.front_default %>"
   alt="pokemon" 
   class="pokemon_image">
       
   <h1 class="pokemon_data">
-      <span class="pokemon_number"></span> -
-      <span class="pokemon_name"></span>
+      <span class="pokemon_number"><%= pokemon.id %></span>
+      <span class="pokemon_name"><%= pokemon.name %></span>
   </h1>
 
   <form>

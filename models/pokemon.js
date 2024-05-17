@@ -3,26 +3,54 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const pokemonSchema = new Schema({
-    id: Number,
-    num: String,
-    name: String,
-    img: String,
-    types: [String],
-    abilities: [String],
-    baseStats: {
-        hp: Number,
-        attack: Number,
-        defense: Number,
+  name: {
+    type: String,
+    required: true
+  },
+  id: {
+    type: Number,
+    required: true,
+    unique: true
+  },
+  types: [{
+    type: String,
+    required: true
+  }],
+  abilities: [{
+    name: {
+      type: String,
+      required: true
     },
-    sprites: {
-        frontDefault: String,
-        backDefault: String,
-      },
-    next_evolution: [
-        { String },
-        { String }
-    ]
-}
-)
+  }],
+  stats: [{
+    name: {
+      type: String,
+      required: true
+    },
+    base_stat: {
+      type: Number,
+      required: true
+    }
+  }],
+  height: {
+    type: Number,
+    required: true
+  },
+  weight: {
+    type: Number,
+    required: true
+  },
+  sprites: {
+    front_default: {
+      type: String
+    },
+    back_default: {
+      type: String
+    }
+
+  },
+
+})
+
 
 module.exports = mongoose.model('Pokemon', pokemonSchema)
