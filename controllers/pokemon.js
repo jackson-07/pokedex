@@ -18,21 +18,27 @@ async function fetchPokemon(pokemon) {
   }
 }
 
-async function savePokemon() {
+async function savePokemon(pokemon) {
   try {
     const data = await fetchPokemon(pokemon)
 
     const pokemonData = {
       name: data.name,
       id: data.id,
-      types: data.types.map(typeInfo => typeInfo.type.name),
-      abilities: data.abilities.map(abilityInfo => ({
-        name: abilityInfo.ability.name
-      })),
-      stats: data.stats.map(statInfo => ({
-        name: statInfo.stat.name,
-        base_stat: statInfo.base_stat
-      })),
+      types: data.types.map(function(typeInfo) {
+        return typeInfo.type.name
+      }),
+      abilities: data.abilities.map(function(abilityInfo) {
+        return {
+          name: abilityInfo.ability.name
+        }
+      }),
+      stats: data.stats.map(function(statInfo) {
+        return {
+          name: statInfo.stat.name,
+          base_stat: statInfo.base_stat
+        }
+      }),
       height: data.height,
       weight: data.weight,
       sprites: {
@@ -50,7 +56,6 @@ async function savePokemon() {
     console.error('Error:', error)
   }
 }
-
 
 async function renderPokemon(req, res) {
   try {
