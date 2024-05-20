@@ -6,20 +6,24 @@
 
         <h1 class='pokemon_data'>
             <span class='pokemon_number'><%= pokemon ? pokemon.id : '' %></span>
-            <span class='pokemon_name'><%= pokemon ? pokemon.name : '' %></span>
+
+            <a href="/pokemon/<%= pokemon ? pokemon.id : '' %>">       
+                <span class='pokemon_name'>
+                    <%= pokemon ? pokemon.name : '' %>
+                </span>
+            </a>
         </h1>
 
-        <form action='/search' method='POST'>
+        <form action='/' method='POST'>
             <input type='search' name='pokemon' class='input_search' placeholder='Search' required>
         </form>
 
         <div class='buttons'>
-            <button class='button btn-prev'>Prev &lt;</button>
-            <button class='button btn-next'>Next &gt;</button>
+            <button action='/user' method='POST'>Login</button>
         </div>
 
         <img src='../images/pokedex.png' class='pokedex' alt='pokedex'>
 
     </main>
 
-    <%- include('./partials/footer') %>
+<%- include('./partials/footer') %>
