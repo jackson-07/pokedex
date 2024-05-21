@@ -1,3 +1,25 @@
 <%- include('./partials/header') %>
 
+    <% if (!user ) { %>
+        <h1>Login</h1>
+    
+        <form action="/user" method="POST">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit">Login</button>
+            <br>
+            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
+        </form>
+            
+            <% } else { %>
+
+                <h1>You're logged in mate</h1>
+
+                <% } %>
+
+
 <%- include('./partials/footer') %>

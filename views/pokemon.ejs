@@ -12,24 +12,12 @@
             </span>
         </h1>
         
-        
         <div class='show_pokemon'>
             <h3>Types:</h3>
             <ul>
                 <% if (pokemon && pokemon.types) { %>
                     <% pokemon.types.forEach(function(typeObject) { %>
                         <li><%= typeObject.type.name %></li>
-                    <% }) %>
-                <% } %>
-            </ul>
-        </div>
-
-        <div class='show_pokemon'>
-            <h3>Abilities:</h3>
-            <ul>
-                <% if (pokemon && pokemon.abilities) { %>
-                    <% pokemon.abilities.forEach(function(abilityObject) { %>
-                        <li><%= abilityObject.ability.name %></li>
                     <% }) %>
                 <% } %>
             </ul>
@@ -47,11 +35,11 @@
         </div>
         
         <div class='show_pokemon'>
+            <h3>Size:</h3>
             <p>Height: <%= pokemon ? pokemon.height : '' %> decimetres</p>
             <p>Weight: <%= pokemon ? pokemon.weight : '' %> hectograms</p>
         </div>
-    </div>
-
+    
     </main>
 
     <%- include('./partials/footer') %>
