@@ -1,36 +1,54 @@
 <%- include('./partials/header') %>
+<main>
+    <% if (!user) { %>
+        
+        <img src="<%= pokemon ? pokemon.sprites.front_default : '' %>" class="pokemon_image">
+        
+        <h1 class="pokemon_data">
+            <span class="pokemon_number">
+                <%= pokemon ? pokemon.id : '' %>
+            </span>
 
-    <main>
+            <span class="pokemon_name">
+                <%= pokemon ? pokemon.name : '' %>
+            </span>
+        </h1>
 
-        <img src='<%= pokemon ? pokemon.sprites.front_default : '' %>' class='pokemon_image'><img>
+        <form action="/" method="POST">
+            <input type="search" name="pokemon" class="input_search" placeholder="Search" required>
+        </form>
 
-        <h1 class='pokemon_data'>
-            <span class='pokemon_number'><%= pokemon ? pokemon.id : '' %></span>
+        <div>
+            <a href="/auth/google" class="login"><button type="button">Login</button></a>
+        </div>
 
-            <a href="/pokemon/<%= pokemon ? pokemon.id : '' %>">       
-                <span class='pokemon_name'>
+    <% } else { %>
+
+        <img src="<%= pokemon ? pokemon.sprites.front_default : '' %>" class="pokemon_image">
+
+        <h1 class="pokemon_data">
+            <span class="pokemon_number">
+                <%= pokemon ? pokemon.id : '' %>
+            </span>
+
+            <a href="/pokemon/<%= pokemon ? pokemon.id : '' %>">
+                <span class="pokemon_name">
                     <%= pokemon ? pokemon.name : '' %>
                 </span>
             </a>
         </h1>
 
-        <form action='/' method='POST'>
-            <input type='search' name='pokemon' class='input_search' placeholder='Search' required>
+        <form action="/" method="POST">
+            <input type="search" name="pokemon" class="input_search" placeholder="Search" required>
         </form>
 
-        <% if (!user ) { %>
-    
-            <div>
-                <a href="/auth/google" type="submit" class="login"><button action='/user'>Login</button></a>
-            </div>
-                
-                <% } else { %>
-    
-                    <% } %>
+        <div>
+            <a href="/logout" class="login"><button type="button">Log Out</button></a>
+        </div>
+    <% } %>
 
+    <img src="../images/pokedex.png" class="pokedex" alt="pokedex">
 
-        <img src='../images/pokedex.png' class='pokedex' alt='pokedex'>
+</main>
 
-    </main>
-
-<%- include('./partials/footer') %>
+    <%- include('./partials/footer') %>
