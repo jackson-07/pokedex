@@ -2,9 +2,11 @@ const Pokemon = require('../models/pokemon')
 
 module.exports = {
   fetchPokemon,
-  savePokemon,
   renderPokemon,
-
+  fetchAllPokemon,
+  renderAllPokemon,
+  savePokemon,
+  
 }
 
 async function fetchPokemon(pokemon) {
@@ -13,6 +15,45 @@ async function fetchPokemon(pokemon) {
     const data = await response.json()
     console.log(data)
     return data
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
+
+async function renderPokemon(req, res) {
+  try {
+    const { id } = req.params
+    const pokemon = await Pokemon.findOne({ id })
+
+    res.render('pokemon', { pokemon })
+  } catch (error) {
+    console.error('Error:', error)
+
+  }
+}
+
+async function fetchAllPokemon() {
+  try {
+    const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=1025')
+    const data = await response.json()
+    const pokemonList = data.results
+
+    // Fetch details for each Pokémon
+    const pokemonDetailsPromises = pokemonList.map(function(pokemon) {
+      return fetchPokemon(pokemon.name)
+    });
+    const pokemonDetails = await Promise.all(pokemonDetailsPromises)
+
+    return pokemonDetails
+  } catch (error) {
+    console.error('Error:', error)
+  }
+}
+
+async function renderAllPokemon(req, res) {
+  try {
+    const allPokemon = await fetchAllPokemon()
+    res.render('allPokemon', { pokemon: allPokemon })
   } catch (error) {
     console.error('Error:', error)
   }
@@ -45,7 +86,7 @@ async function savePokemon(pokemon) {
         front_default: data.sprites.front_default,
         back_default: data.sprites.back_default
       }
-    };
+    }
 
     const pokemon = new Pokemon(pokemonData)
     await pokemon.save()
@@ -57,14 +98,3 @@ async function savePokemon(pokemon) {
   }
 }
 
-async function renderPokemon(req, res) {
-  try {
-    const { id } = req.params
-    const pokemon = await Pokemon.findOne({ id })
-
-    res.render('pokemon', { pokemon })
-  } catch (error) {
-    console.error('Error:', error)
-
-  }
-}

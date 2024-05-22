@@ -18,9 +18,16 @@
             <input type='search' name='pokemon' class='input_search' placeholder='Search' required>
         </form>
 
-        <div class='buttons'>
-            <button action='/user' method='POST'>Login</button>
-        </div>
+        <% if (!user ) { %>
+    
+            <div>
+                <a href="/auth/google" type="submit" class="login"><button action='/user'>Login</button></a>
+            </div>
+                
+                <% } else { %>
+    
+                    <% } %>
+
 
         <img src='../images/pokedex.png' class='pokedex' alt='pokedex'>
 

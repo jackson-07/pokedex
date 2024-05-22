@@ -1,25 +1,27 @@
 <%- include('./partials/header') %>
 
-    <% if (!user ) { %>
-        <h1>Login</h1>
-    
-        <form action="/user" method="POST">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <br>
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            <br>
-            <button type="submit">Login</button>
-            <br>
-            <a href="/auth/google" class="login">LOG IN&nbsp;<img src="https://i.imgur.com/FHjYyi0.png"></a>
-        </form>
-            
-            <% } else { %>
+    <form action="/pokemon/<%= pokemon ? pokemon.id : '' %>" method='POST'>
+        <input type='search' name='pokemon' class='input_search' placeholder='Search' required>
+    </form>
 
-                <h1>You're logged in mate</h1>
+    <h1>Pokedex</h1>
+    <ul>
+        <% if (pokemon) { %>
+            <% pokemon.forEach(p=> { %>
+                <li>
+                    <h2>
+                        <%= p.name %>
+                    </h2>
+                    <img src="<%= p.sprites.front_default %>">
+                    <p>Height: <%= p.height %>
+                    </p>
+                    <p>Weight: <%= p.weight %>
+                    </p>
+                </li>
+                <% }) %>
+                    <% } else { %>
+                        <li>No Pokémon found</li>
+                        <% } %>
+    </ul>
 
-                <% } %>
-
-
-<%- include('./partials/footer') %>
+    <%- include('./partials/footer') %>
