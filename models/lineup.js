@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const battleLineupSchema = new Schema({
+const lineupSchema = new Schema({
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'user',
@@ -24,4 +24,4 @@ const battleLineupSchema = new Schema({
     }]
 })
 
-module.exports = mongoose.model('BattleLineup', battleLineupSchema)
+module.exports = mongoose.model('Lineup', lineupSchema)

@@ -1,3 +1,20 @@
 <%- include('./partials/header') %>
+<h1>Your Lineup</h1>
+
+<% if (lineup && lineup.length > 0) { %>
+    <% lineup.forEach(function(pokemon) { %>
+        <div class="pokemon">
+            <img src="<%= pokemon.sprites.front_default %>" alt="<%= pokemon.name %>">
+            
+            <h1 class='show_pokemon'>
+                <span><%= pokemon.name %></span>
+            </h1>
+    <% }) %>
+
+<% } else { %>
+ 
+    <p>No Pokémon in your lineup yet.</p>
+
+<% } %>
 
 <%- include('./partials/footer') %>

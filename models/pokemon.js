@@ -22,6 +22,10 @@ const pokemonSchema = new Schema({
       required: true
     },
   }],
+  moves: [{
+    type: String,
+    required: true
+  }],
   stats: [{
     name: {
       type: String,

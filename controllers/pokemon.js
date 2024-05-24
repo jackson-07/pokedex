@@ -4,6 +4,7 @@ module.exports = {
   fetchPokemon,
   renderPokemon,
   savePokemon,
+  getLineup
   
 }
 
@@ -45,6 +46,9 @@ async function savePokemon(pokemon) {
           name: abilityInfo.ability.name
         }
       }),
+      moves: data.moves.map(function(moveInfo) {
+        return moveInfo.move.name
+      }),
       stats: data.stats.map(function(statInfo) {
         return {
           name: statInfo.stat.name,
@@ -65,5 +69,14 @@ async function savePokemon(pokemon) {
     return pokemon
   } catch (error) {
     console.error('Error:', error)
+  }
+}
+
+async function getLineup(req, res, next) {
+  try {
+    const lineup = await Pokemon.find({})
+    res.render('lineup', { lineup })
+  } catch (error) {
+    next(error)
   }
 }
