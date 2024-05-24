@@ -9,6 +9,32 @@
             <h1 class='show_pokemon'>
                 <span><%= pokemon.name %></span>
             </h1>
+
+            <form action="/lineup" method="POST" class="add"">
+                <h2>
+                    <select id="<% pokemon %>">
+                        <% pokemon.moves.forEach(function(move) { %>
+                            <option value="<%= pokemon.move %>"><%= pokemon.move %></option>
+                            <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
+                            <button>Add to Lineup</button>
+                        <% }) %>
+                    </select>
+                </h2>
+
+            </form>
+
+            <div id="<%= pokemon %>">
+                <% if (pokemon.selectedMoves && pokemon.selectedMoves.length > 0) { %>
+                    <% pokemon.selectedMoves.forEach(function(move) { %>
+                        <div class="move">
+                            <span><%= move %></span>
+                            <input type="hidden" name="pokemonId" value="<%= pokemon.selectedMoves %>">
+                            <button>X</button>
+                        </div>
+                    <% }) %>
+                <% } %>
+            </div>
+
     <% }) %>
 
 <% } else { %>

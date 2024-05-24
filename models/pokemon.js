@@ -54,6 +54,8 @@ const pokemonSchema = new Schema({
 
   },
 
+  selectedMoves: [String]
+
 })
 
 

@@ -1,3 +1,4 @@
+const pokemon = require('../models/pokemon')
 const Pokemon = require('../models/pokemon')
 const User = require('../models/user')
 
@@ -6,7 +7,10 @@ module.exports = {
   renderPokemon,
   savePokemon,
   addToLineup,
-  getLineup
+  getLineup,
+  addMove,
+  deleteMove
+
 }
 
 async function fetchPokemon(pokemon) {
@@ -63,7 +67,7 @@ async function savePokemon(pokemonId) {
         back_default: data.sprites.back_default
       }
     }
-
+    
     const user = await User.findById(req.params.id)
     addToLineup(pokemonData, user)
 
@@ -78,9 +82,9 @@ async function savePokemon(pokemonId) {
 
 async function addToLineup(pokemonData, user) {
    // needs the be users/numbers for id/pokemon or /lineup - look through Movies
-  user.lineup.push(req.body.pokemonId)
-  await user.save()
-  res.redirect(`/users/${id}/lineup`)
+   user.lineup.push(req.body.pokemonId)
+   await user.save()
+   res.redirect(`/users/${id}/lineup`)
 }
 
 async function getLineup(req, res, next) {
@@ -90,4 +94,15 @@ async function getLineup(req, res, next) {
   } catch (error) {
     next(error)
   }
+}
+
+async function addMove(req, res) {
+  const move = await Pokemon.findById(req.params.id)
+  pokemon.move.push(req.body.move)
+  await move.save()
+  res.redirect()
+}
+
+async function deleteMove () {
+
 }
