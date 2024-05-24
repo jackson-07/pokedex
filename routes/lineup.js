@@ -2,17 +2,25 @@ var express = require('express')
 var router = express.Router()
 
 const pokemonController = require('../controllers/pokemon')
+const lineup = require('../models/lineup')
+const user = require('../models/user')
+const pokemon = require('../models/pokemon')
+const ensureLoggedIn = require('../config/ensureLoggedIn')
 
-router.get('/lineup', function(req, res, next) {
-    res.render('lineup', { title: 'Pokedex' })
+router.get('/users/:id/lineup', ensureLoggedIn, function(req, res, next) {
+    const userId = req.user.id;
+    // const user = user.findById(req.params.id)
+    console.log(req.user)
+    res.render('lineup', { userId: userId, lineup: [] })
 })
   
-router.post('/lineup', async function(req, res, next) {
+router.post('/users/:id/lineup', ensureLoggedIn, async function(req, res, next) {
+    
     const pokemonName = req.body.pokemonId
-    await savePokemon(pokemonName)
+    await pokemonController.savePokemon(pokemonName)
     res.redirect('/lineup')
 })
 
-router.get('/lineup', pokemonController.getLineup)
+router.get('/user/:id/lineup', ensureLoggedIn, pokemonController.getLineup)
 
 module.exports = router

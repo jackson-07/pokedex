@@ -5,9 +5,11 @@ const User = require('../models/user')
 const bcrypt = require('bcrypt')
 const session = require('express-session')
 const pokemonController = require('../controllers/pokemon')
+const ensureLoggedIn = require('../config/ensureLoggedIn')
 
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Pokedex', pokemon: null })
+router.get('/users', function(req, res, next) {
+  const userId = req.user.id
+  res.render('index', { title: 'Pokedex', userId: userId, pokemon: null })
 })
 
 router.get('/auth/google', passport.authenticate(

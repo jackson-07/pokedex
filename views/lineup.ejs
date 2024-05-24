@@ -1,7 +1,7 @@
 <%- include('./partials/header') %>
 <h1>Your Lineup</h1>
 
-<% if (lineup && lineup.length > 0) { %>
+<% if (user && lineup.length > 0) { %>
     <% lineup.forEach(function(pokemon) { %>
         <div class="pokemon">
             <img src="<%= pokemon.sprites.front_default %>" alt="<%= pokemon.name %>">

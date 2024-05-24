@@ -1,11 +1,12 @@
 const Pokemon = require('../models/pokemon')
+const User = require('../models/user')
 
 module.exports = {
   fetchPokemon,
   renderPokemon,
   savePokemon,
+  addToLineup,
   getLineup
-  
 }
 
 async function fetchPokemon(pokemon) {
@@ -31,9 +32,9 @@ async function renderPokemon(req, res) {
   }
 }
 
-async function savePokemon(pokemon) {
+async function savePokemon(pokemonId) {
   try {
-    const data = await fetchPokemon(pokemon)
+    const data = await fetchPokemon(pokemonId)
 
     const pokemonData = {
       name: data.name,
@@ -63,13 +64,23 @@ async function savePokemon(pokemon) {
       }
     }
 
-    const pokemon = new Pokemon(pokemonData)
-    await pokemon.save()
+    const user = await User.findById(req.params.id)
+    addToLineup(pokemonData, user)
 
-    return pokemon
+    // // const pokemon = new Pokemon(pokemonData)
+    // // await pokemon.save()
+
+    // return pokemon
   } catch (error) {
     console.error('Error:', error)
   }
+}
+
+async function addToLineup(pokemonData, user) {
+   // needs the be users/numbers for id/pokemon or /lineup - look through Movies
+  user.lineup.push(req.body.pokemonId)
+  await user.save()
+  res.redirect(`/users/${id}/lineup`)
 }
 
 async function getLineup(req, res, next) {

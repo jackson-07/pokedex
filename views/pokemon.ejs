@@ -41,11 +41,14 @@
         </div>
         <br>
         <br>
-        <h3>
-            <a href="/lineup">Add to Lineup</a>
-
-        </h3>
+        <form action="/lineup" method="POST" class="add">
+            <h3>
+                <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
+                <button>Add to Lineup</button>
+    
+            </h3>
+        </form>
     
     </main>
 
-    <%- include('./partials/footer') %>
+<%- include('./partials/footer') %>

@@ -1,7 +1,7 @@
 <%- include('./partials/header') %>
 <main>
     <% if (!user) { %>
-        
+
         <img src="<%= pokemon ? pokemon.sprites.front_default : '' %>" class="pokemon_image">
         
         <h1 class="pokemon_data">
@@ -19,7 +19,7 @@
         </form>
 
         <div>
-            <a href="/auth/google" class="login"><button type="button">Login</button></a>
+            <a href="/users/auth/google" class="login"><button type="button">Login</button></a>
         </div>
 
     <% } else { %>
@@ -43,7 +43,7 @@
         </form>
 
         <div>
-            <a href="/logout" class="login"><button type="button">Log Out</button></a>
+            <a href="/users/logout" class="login"><button type="button">Log Out</button></a>
         </div>
     <% } %>
 
@@ -51,4 +51,4 @@
 
 </main>
 
-    <%- include('./partials/footer') %>
+<%- include('./partials/footer') %>
