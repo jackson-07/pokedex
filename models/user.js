@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const lineup = require('./lineup')
+const {lineupSchema, test} = require('./lineup')
 
 const Schema = mongoose.Schema
 
@@ -10,10 +10,12 @@ const userSchema = new Schema ({
         required: true
       },
       email: String,
-      avatar: String
+      avatar: String,
+      lineup: [test] 
     }, {
+
       timestamps: true,
-      lineup: [lineup]
+      
 })
 
 module.exports = mongoose.model('User', userSchema)

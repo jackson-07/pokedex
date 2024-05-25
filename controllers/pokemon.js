@@ -7,6 +7,7 @@ module.exports = {
   renderPokemon,
   savePokemon,
   addToLineup,
+  removeFromLineup,
   getLineup,
   addMove,
   deleteMove
@@ -17,7 +18,6 @@ async function fetchPokemon(pokemon) {
   try {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
     const data = await response.json()
-    console.log(data)
     return data
   } catch (error) {
     console.error('Error:', error)
@@ -67,25 +67,29 @@ async function savePokemon(pokemonId) {
         back_default: data.sprites.back_default
       }
     }
-    
-    const user = await User.findById(req.params.id)
-    addToLineup(pokemonData, user)
 
-    // // const pokemon = new Pokemon(pokemonData)
-    // // await pokemon.save()
+    const pokemon = new Pokemon(pokemonData)
+    await pokemon.save()
 
-    // return pokemon
+    return pokemon
   } catch (error) {
     console.error('Error:', error)
   }
 }
 
-async function addToLineup(pokemonData, user) {
-   // needs the be users/numbers for id/pokemon or /lineup - look through Movies
-   user.lineup.push(req.body.pokemonId)
+async function addToLineup(pokemonID, userId) {
+   const pokemon = await Pokemon.findOne({id: pokemonID})
+   const user = await User.findById(userId)
+   user.lineup.push(pokemon)
    await user.save()
-   res.redirect(`/users/${id}/lineup`)
 }
+
+async function removeFromLineup(pokemonID, userId) {
+    const pokemon = await Pokemon.findOne({id: pokemonID})
+    const user = await User.findById(userId)
+    user.lineup.pop(pokemon)
+    await user.save()
+ }
 
 async function getLineup(req, res, next) {
   try {
@@ -103,6 +107,9 @@ async function addMove(req, res) {
   res.redirect()
 }
 
-async function deleteMove () {
-
+async function deleteMove (req, res) {
+  const move = await Pokemon.findById(req.params.id)
+  pokemon.move.pop(req.body.move)
+  await move.save()
+  res.redirect()
 }

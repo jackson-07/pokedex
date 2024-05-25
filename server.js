@@ -13,7 +13,7 @@ require('./config/passport')
 
 var indexRouter = require('./routes/index')
 var pokemonRouter = require('./routes/pokemon')
-var usersRouter = require('./routes/users')
+var homeRouter = require('./routes/home')
 var lineupRouter = require('./routes/lineup')
 
 var app = express()
@@ -43,7 +43,7 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter)
 app.use('/', pokemonRouter)
-app.use('/user', usersRouter)
+app.use('/', homeRouter)
 app.use('/', lineupRouter)
 
 // catch 404 and forward to error handler

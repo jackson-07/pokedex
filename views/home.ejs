@@ -2,23 +2,25 @@
 <main>
 
         <img src="<%= pokemon ? pokemon.sprites.front_default : '' %>" class="pokemon_image">
-        
+
         <h1 class="pokemon_data">
             <span class="pokemon_number">
                 <%= pokemon ? pokemon.id : '' %>
             </span>
 
-            <span class="pokemon_name">
-                <%= pokemon ? pokemon.name : '' %>
-            </span>
+            <a href="/home/pokemon/<%= pokemon ? pokemon.id : '' %>">
+                <span class="pokemon_name">
+                    <%= pokemon ? pokemon.name : '' %>
+                </span>
+            </a>
         </h1>
 
-        <form action="/" method="POST">
+        <form action="/home" method="POST">
             <input type="search" name="pokemon" class="input_search" placeholder="Search" required>
         </form>
 
         <div>
-            <a href="/auth/google" class="login"><button type="button">Login</button></a>
+            <a href="/logout" class="login"><button type="button">Log Out</button></a>
         </div>
 
     <img src="../images/pokedex.png" class="pokedex" alt="pokedex">
