@@ -9,7 +9,7 @@
             <h1 class='show_pokemon'>
                 <span><%= pokemon.name %></span>
             </h1>
-            <form action="/lineup" method="POST" class="add">
+            <form action="/lineup" method="PUT" class="add">
                 <h3>
                     <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
                     <button>Remove from lineup</button>
@@ -24,5 +24,10 @@
     <p>No Pokémon in your lineup yet.</p>
 
 <% } %>
+
+<br>
+<br>
+
+<a href="/home">Home</a>
 
 <%- include('./partials/footer') %>
