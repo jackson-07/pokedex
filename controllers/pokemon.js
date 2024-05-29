@@ -8,9 +8,7 @@ module.exports = {
   savePokemon,
   addToLineup,
   removeFromLineup,
-  getLineup,
-  addMove,
-  deleteMove
+
 
 }
 
@@ -85,31 +83,20 @@ async function addToLineup(pokemonID, userId) {
 }
 
 async function removeFromLineup(pokemonID, userId) {
-    const pokemon = await Pokemon.findOne({id: pokemonID})
-    const user = await User.findById(userId)
-    user.lineup.pop(pokemon)
-    await user.save()
- }
+  const pokemon = await Pokemon.findOne({ id: pokemonID })
+  const user = await User.findById(userId)
+  const newLineup = []
+  for (let i = 0; i < user.lineup.length; i++) {
+    if (pokemonID != user.lineup[i].id) {
 
-async function getLineup(req, res, next) {
-  try {
-    const lineup = await Pokemon.find({})
-    res.render('lineup', { lineup })
-  } catch (error) {
-    next(error)
+      newLineup.push(user.lineup[i])
+    }
+
   }
-}
 
-async function addMove(req, res) {
-  const move = await Pokemon.findById(req.params.id)
-  pokemon.move.push(req.body.move)
-  await move.save()
-  res.redirect()
-}
 
-async function deleteMove (req, res) {
-  const move = await Pokemon.findById(req.params.id)
-  pokemon.move.pop(req.body.move)
-  await move.save()
-  res.redirect()
+  user.lineup = newLineup
+
+  await user.save()
+
 }

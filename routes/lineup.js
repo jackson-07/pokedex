@@ -12,6 +12,12 @@ router.get('/lineup', ensureLoggedIn, async function(req, res, next) {
     const User = await user.findById(req.user.id)
     res.render('lineup', { userId: userId, lineup: User.lineup || [] })
 })
+
+router.delete('/lineup', ensureLoggedIn, async function (req, res, next) {
+    const pokemonID = req.body.pokemonId
+    await pokemonController.removeFromLineup(pokemonID, req.user.id)
+    res.redirect('/lineup')
+})
   
 router.post('/lineup', ensureLoggedIn, async function(req, res, next) {
     const pokemonID = req.body.pokemonId
@@ -20,10 +26,6 @@ router.post('/lineup', ensureLoggedIn, async function(req, res, next) {
     res.redirect('/lineup')
 })
 
-router.post('/lineup', ensureLoggedIn, async function (req, res, next) {
-    const pokemonID = req.body.pokemonId
-    await pokemonController.removeFromLineup(pokemonID, req.user.id)
-    res.redirect('/lineup')
-})
+
 
 module.exports = router

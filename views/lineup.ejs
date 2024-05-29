@@ -9,7 +9,7 @@
             <h1 class='show_pokemon'>
                 <span><%= pokemon.name %></span>
             </h1>
-            <form action="/lineup" method="PUT" class="add">
+            <form action="/lineup?_method=DELETE" method="POST" class="add">
                 <h3>
                     <input type="hidden" name="pokemonId" value="<%= pokemon.id %>">
                     <button>Remove from lineup</button>
